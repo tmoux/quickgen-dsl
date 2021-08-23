@@ -2,10 +2,14 @@
 
 (require syntax/parse/define)
 
-(require quickgen/prelude)
-(provide (all-from-out quickgen/prelude))
-(require quickgen/arrays)
-(provide (all-from-out quickgen/arrays))
+(define-syntax-parse-rule (add-library path)
+  (begin
+    (require path)
+    (provide (all-from-out path))))
+
+(add-library quickgen/lib/prelude)
+(add-library quickgen/lib/arrays)
+(add-library quickgen/lib/query)
 
 
 (define output-file (make-parameter #f))
